@@ -78,8 +78,6 @@ def handle_photo(bot, update):
     except OSError:
         pass
 
-
-
 def main():
     updater = Updater(TOKEN)
 
