@@ -79,6 +79,7 @@ def handle_photo(bot, update):
         pass
 
 
+
 def main():
     updater = Updater(TOKEN)
 
