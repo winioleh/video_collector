@@ -73,12 +73,7 @@ def handle_photo(bot, update):
     filename = img_directory+ '%s.jpg' % update.message.from_user.id
     photo_file.download(img_directory +'%s.jpg' % update.message.from_user.id)
     decoded_barcode = decode(Image.open(img_directory + '%s.jpg' % update.message.from_user.id))
-    barcode = decoded_barcode[0].data.decode("utf-8")
-    r.set(update.message.from_user.id, barcode)
-    update.message.reply_text("Розпізнаний штрих-код: " + barcode+ ".")
-    update.message.reply_text("Тепeр зніміть та завантажте відеоролік, який хочете асоціювати до цього штрих-кодую. Необхідно щоб він тривав більше 15 секунд")
     try:
-        decoded_barcode[0].data.decode("utf-8")
         barcode = decoded_barcode[0].data.decode("utf-8")
         r.set(update.message.from_user.id, barcode)
         update.message.reply_text("Розпізнаний штрих-код: " + barcode+ ".")
