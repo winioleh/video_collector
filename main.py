@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
-import os
-
+import os,sys
+reload(sys)
+sys.setdefaultencoding('utf8')
 import redis
 from pyzbar.pyzbar import decode
 from PIL import Image
@@ -46,8 +47,8 @@ def handle_video(bot, update):
 
         count_of_file = len([name for name in os.listdir(video_directory)])
         video_file = bot.get_file(update.message.video.file_id)
-        if update.message.video.duration < 25:
-            update.message.reply_text("Відеоролік надто короткий, необхідно щоб він тривав більше 25 секунд.")
+        if update.message.video.duration < 15:
+            update.message.reply_text("Відеоролік надто короткий, необхідно щоб він тривав більше 15 секунд.")
         else:
             video_file.download(video_directory + '/%s-%s.mp4' % (barcode.decode("utf-8"), str(count_of_file+1)))
             update.message.reply_text("Відеоролік збережено.")
@@ -75,7 +76,7 @@ def handle_photo(bot, update):
     barcode = decoded_barcode[0].data.decode("utf-8")
     r.set(update.message.from_user.id, barcode)
     update.message.reply_text("Розпізнаний штрих-код: " + barcode+ ".")
-    update.message.reply_text("Тепeр зніміть та завантажте відеоролік, який хочете асоціювати до цього штрих-кодую. Необхідно щоб він тривав більше 25 секунд")
+    update.message.reply_text("Тепeр зніміть та завантажте відеоролік, який хочете асоціювати до цього штрих-кодую. Необхідно щоб він тривав більше 15 секунд")
     try:
         os.remove(filename)
     except OSError:
