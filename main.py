@@ -77,7 +77,7 @@ def handle_photo(bot, update):
         barcode = decoded_barcode[0].data.decode("utf-8")
         r.set(update.message.from_user.id, barcode)
         update.message.reply_text("Розпізнаний штрих-код: " + barcode+ ".")
-        update.message.reply_text("Тепeр зніміть та завантажте відеоролік, який хочете асоціювати до цього штрих-кодую. Необхідно щоб він тривав більше 25 секунд")
+        update.message.reply_text("Тепeр зніміть та завантажте відеоролік, який хочете асоціювати до цього штрих-кодую. Необхідно щоб він тривав більше 15 секунд")
     except Exception as e:
         update.message.reply_text("Штрих код не знайдено, спробуй щераз")
     try:
