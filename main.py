@@ -65,10 +65,13 @@ def video_count(bot, update):
 def handle_photo(bot, update):
 
     update.message.reply_text("Очікуйте результату")
+    img_directory = dir_path + '/imgs/'
+    if not os.path.exists(img_directory):
+        os.makedirs(img_directory)
     photo_file = bot.get_file(update.message.photo[-1].file_id)
-    filename = dir_path+'/imgs/%s.jpg' % update.message.from_user.id
-    photo_file.download(dir_path+'/imgs/%s.jpg' % update.message.from_user.id)
-    decoded_barcode = decode(Image.open(dir_path + '/imgs/%s.jpg' % update.message.from_user.id))
+    filename = img_directory+ '%s.jpg' % update.message.from_user.id
+    photo_file.download(img_directory +'%s.jpg' % update.message.from_user.id)
+    decoded_barcode = decode(Image.open(img_directory + '%s.jpg' % update.message.from_user.id))
     barcode = decoded_barcode[0].data.decode("utf-8")
     r.set(update.message.from_user.id, barcode)
     update.message.reply_text("Розпізнаний штрих-код: " + barcode+ ".")
